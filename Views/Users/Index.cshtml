@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SocialMedia.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> roleList = ViewBag.RoleList;
+}
+
+<h2>Index</h2>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (ViewBag.displayMenu == "Yes")
+{
+    <h1>Welcome Admin. Now you can create user Role.</h1>
+    <h3>
+        <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
+    </h3>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayName("Role")
+            </th>
+            <th></th>
+        </tr>
+
+        @for (int i=0; i<Model.Count() ;i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.ElementAt(i).Email)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => Model.ElementAt(i).UserName)
+                </td>
+                <td>
+                    <p>@roleList.ElementAt(i)</p>
+                </td>
+                <td>
+                    <p>aaa</p>
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h2>  Welcome <strong>@ViewBag.Name</strong> :) .We will add user module soon </h2>
+}
+
