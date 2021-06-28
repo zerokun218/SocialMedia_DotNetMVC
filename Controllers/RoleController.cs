@@ -23,6 +23,7 @@ namespace SocialMedia.Controllers
                 var user = User.Identity;
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                 var s = UserManager.GetRoles(user.GetUserId());
+
                 if (s[0].ToString() == "Admin")
                 {
                     return true;

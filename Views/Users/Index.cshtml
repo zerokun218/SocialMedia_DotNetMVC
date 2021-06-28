@@ -37,21 +37,28 @@
             <th></th>
         </tr>
 
-        @for (int i=0; i<Model.Count() ;i++)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => Model.ElementAt(i).Email)
+                    @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 
                 <td>
-                    @Html.DisplayFor(modelItem => Model.ElementAt(i).UserName)
+                    @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
-                    <p>@roleList.ElementAt(i)</p>
+                    @{ 
+                        var roleId = item.Roles.Where(r => r.UserId == item.Id).FirstOrDefault().RoleId;
+                        var role = (new SocialMedia.Models.ApplicationDbContext()).Roles
+                            .Where(r => r.Id == roleId)
+                            .FirstOrDefault().Name;
+                    }
+                    @Html.DisplayFor(modelItem => role)
                 </td>
                 <td>
-                    <p>aaa</p>
+                    @item.Id |
+                    @Html.ActionLink("Detail","Detail","Users", new { Id = item.Id}, null)
                 </td>
             </tr>
         }

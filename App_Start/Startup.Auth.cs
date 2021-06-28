@@ -58,11 +58,11 @@ namespace SocialMedia
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "676177369192-7dm9u2n0rve2gidpvual9o42relh38o5.apps.googleusercontent.com",
+                ClientSecret = "qk7EryVR06NO3_nl5dCecn7P"
+            });
         }
     }
 }
