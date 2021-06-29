@@ -385,10 +385,9 @@ namespace SocialMedia.Controllers
                 {
                     //Add role to new User
                     UserManager.AddToRole(user.Id, "Employee");
-<<<<<<< HEAD
+
                     DAL.DBContext.addNewUserInfo(user);
-=======
->>>>>>> 18a1efb99c7ed605fdded8832671ad8b0ea3e202
+
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {

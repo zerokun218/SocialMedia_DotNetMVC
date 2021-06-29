@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -181,6 +182,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -200,6 +202,9 @@
       <DependentUpon>SocialMediaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="tb_Blog.cs">
+      <DependentUpon>SocialMediaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_UserInfo.cs">
       <DependentUpon>SocialMediaModel.tt</DependentUpon>
     </Compile>
@@ -283,10 +288,13 @@
     <Content Include="SocialMediaModel.edmx.diagram">
       <DependentUpon>SocialMediaModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\Create.cshtml" />
+    <Content Include="Views\Blog\Edit.cshtml" />
+    <Content Include="Views\Blog\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="SQLQuery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

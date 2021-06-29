@@ -25,6 +25,7 @@ namespace SocialMedia
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tb_Blog> tb_Blog { get; set; }
         public virtual DbSet<tb_UserInfo> tb_UserInfo { get; set; }
     }
 }

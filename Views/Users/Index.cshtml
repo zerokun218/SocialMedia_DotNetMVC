@@ -12,16 +12,13 @@
     ViewBag.Title = "Index";
 }
 
-@if (ViewBag.displayMenu == "Yes")
+@if (User.Identity.IsAuthenticated)
 {
     <h1>Welcome Admin. Now you can create user Role.</h1>
     <h3>
         <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
     </h3>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table">
         <tr>
             <th>

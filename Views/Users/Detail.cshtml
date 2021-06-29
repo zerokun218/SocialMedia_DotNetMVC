@@ -112,6 +112,25 @@
             }
             @Html.DisplayFor(model => role)
         </dd>
+
+        @if (ViewBag.AllowChangePassword != null)
+        {
+            <dt>
+                Change Password
+            </dt>
+
+            <dd>
+                @if (Model.PasswordHash != null)
+                {
+                    @Html.ActionLink("[Change]", "ChangePassword", "Manage")
+                }
+                else
+                {
+                    @Html.ActionLink("[Create]", "SetPassword", "Manage")
+                }
+
+            </dd>
+        }
     </dl>
 </div>
 <p>

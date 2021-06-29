@@ -18,5 +18,11 @@ namespace SocialMedia.DAL
             db.tb_UserInfo.Add(userInfo);
             db.SaveChanges();
         }
+
+        public static void addNewBlog(tb_Blog blog) {
+            db.tb_Blog.Add(blog);
+            db.SaveChanges();
+        }
+
     }
 }

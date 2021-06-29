@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SocialMediaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tb_Blog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Author" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" MaxLength="2044" Nullable="false" />
+  </EntityType>
   <EntityType Name="tb_UserInfo">
     <Key>
       <PropertyRef Name="Id" />
@@ -10,7 +19,24 @@
     <Property Name="Age" Type="int" />
     <Property Name="Role" Type="nvarchar" MaxLength="254" />
   </EntityType>
+  <Association Name="fk_blog_user">
+    <End Role="tb_UserInfo" Type="Self.tb_UserInfo" Multiplicity="1" />
+    <End Role="tb_Blog" Type="Self.tb_Blog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_UserInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Blog">
+        <PropertyRef Name="Author" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="SocialMediaDBModelStoreContainer">
+    <EntitySet Name="tb_Blog" EntityType="Self.tb_Blog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_UserInfo" EntityType="Self.tb_UserInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_blog_user" Association="Self.fk_blog_user">
+      <End Role="tb_UserInfo" EntitySet="tb_UserInfo" />
+      <End Role="tb_Blog" EntitySet="tb_Blog" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

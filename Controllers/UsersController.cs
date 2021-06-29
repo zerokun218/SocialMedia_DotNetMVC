@@ -46,6 +46,7 @@ namespace SocialMedia.Controllers
                 {
                     ViewBag.displayMenu = "Yes";
                 }
+                
                 var userList = context.Users.ToList();
                 return View(userList);
             }
@@ -60,6 +61,7 @@ namespace SocialMedia.Controllers
         public ActionResult Detail(string Id) {
             if (String.IsNullOrEmpty(Id)) {
                 Id = User.Identity.GetUserId();
+                ViewBag.AllowChangePassword = "true";
             }
             var user = (context).Users.Where(u => u.Id == Id).FirstOrDefault();
             return View(user);

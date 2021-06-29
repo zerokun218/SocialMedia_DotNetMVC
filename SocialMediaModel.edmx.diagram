@@ -4,8 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="88445f8ff234414fb85691f6803da563" Name="Diagram1">
-        <EntityTypeShape EntityType="SocialMediaDBModel.tb_UserInfo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="ad9fef1a595b47a18bc6e1e48fe97cb7" Name="Diagram1">
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_Blog" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_UserInfo" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_blog_user" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
