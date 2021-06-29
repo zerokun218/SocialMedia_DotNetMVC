@@ -274,6 +274,8 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\UserInfo\Index.cshtml" />
+    <Content Include="Views\Users\Detail.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
     <EntityDeploy Include="SocialMediaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SocialMediaModel.Designer.cs</LastGenOutput>
@@ -281,8 +283,6 @@
     <Content Include="SocialMediaModel.edmx.diagram">
       <DependentUpon>SocialMediaModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Users\Detail.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
