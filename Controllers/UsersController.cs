@@ -82,10 +82,13 @@ namespace SocialMedia.Controllers
                 return View(user);
             }
             var oldUser = context.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+            //Delete current User
             var result = context.Users.Remove(oldUser);
             context.SaveChanges();
+            //Add Edited User
             context.Users.Add(user);
             context.SaveChanges();
+            //Add role to Edited User
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             UserManager.AddToRole(user.Id, role);
             return RedirectToAction("Index");
