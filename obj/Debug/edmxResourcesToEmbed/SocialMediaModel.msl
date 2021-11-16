@@ -8,6 +8,53 @@
           <ScalarProperty Name="Author" ColumnName="Author" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_BlogGroup">
+      <EntityTypeMapping TypeName="SocialMediaDBModel.tb_BlogGroup">
+        <MappingFragment StoreEntitySet="tb_BlogGroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Comment">
+      <EntityTypeMapping TypeName="SocialMediaDBModel.tb_Comment">
+        <MappingFragment StoreEntitySet="tb_Comment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Favorite">
+      <EntityTypeMapping TypeName="SocialMediaDBModel.tb_Favorite">
+        <MappingFragment StoreEntitySet="tb_Favorite">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Group">
+      <EntityTypeMapping TypeName="SocialMediaDBModel.tb_Group">
+        <MappingFragment StoreEntitySet="tb_Group">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_UserGroup">
+      <EntityTypeMapping TypeName="SocialMediaDBModel.tb_UserGroup">
+        <MappingFragment StoreEntitySet="tb_UserGroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -19,6 +66,7 @@
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Age" ColumnName="Age" />
           <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

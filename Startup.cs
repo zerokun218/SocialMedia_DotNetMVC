@@ -45,9 +45,8 @@ namespace SocialMedia
                 //Add default User to Role Admin  
                 if (chkUser.Succeeded)
                 {
-                    DAL.DBContext.addNewUserInfo(user);
                     var result1 = UserManager.AddToRole(user.Id, "Admin");
-
+                    DAL.DBContext.addNewUserInfo(user);
                 }
             }
 

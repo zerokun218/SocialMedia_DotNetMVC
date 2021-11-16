@@ -8,16 +8,59 @@
     <Property Name="Author" Type="int" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="254" Nullable="false" />
     <Property Name="Content" Type="nvarchar" MaxLength="2044" Nullable="false" />
+    <Property Name="ImageUrl" Type="varchar" MaxLength="254" />
+  </EntityType>
+  <EntityType Name="tb_BlogGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="BlogId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BlogId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" MaxLength="1022" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_Favorite">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BlogId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Owner" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="254" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_UserGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="MemberId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tb_UserInfo">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="varchar" MaxLength="254" Nullable="false" />
+    <Property Name="UserId" Type="varchar" MaxLength="254" />
     <Property Name="Username" Type="nvarchar" MaxLength="50" />
     <Property Name="Age" Type="int" />
     <Property Name="Role" Type="nvarchar" MaxLength="254" />
+    <Property Name="ImageUrl" Type="varchar" MaxLength="254" />
   </EntityType>
   <Association Name="fk_blog_user">
     <End Role="tb_UserInfo" Type="Self.tb_UserInfo" Multiplicity="1" />
@@ -31,12 +74,161 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_BlogGroup_BlogId">
+    <End Role="tb_Blog" Type="Self.tb_Blog" Multiplicity="1" />
+    <End Role="tb_BlogGroup" Type="Self.tb_BlogGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Blog">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_BlogGroup">
+        <PropertyRef Name="BlogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_BlogGroup_GroupId">
+    <End Role="tb_Group" Type="Self.tb_Group" Multiplicity="1" />
+    <End Role="tb_BlogGroup" Type="Self.tb_BlogGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_BlogGroup">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_comment_blog">
+    <End Role="tb_Blog" Type="Self.tb_Blog" Multiplicity="1" />
+    <End Role="tb_Comment" Type="Self.tb_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Blog">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Comment">
+        <PropertyRef Name="BlogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_comment_user">
+    <End Role="tb_UserInfo" Type="Self.tb_UserInfo" Multiplicity="1" />
+    <End Role="tb_Comment" Type="Self.tb_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_UserInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Comment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Favorite_Blog">
+    <End Role="tb_Blog" Type="Self.tb_Blog" Multiplicity="1" />
+    <End Role="tb_Favorite" Type="Self.tb_Favorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Blog">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Favorite">
+        <PropertyRef Name="BlogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Favorite_User">
+    <End Role="tb_UserInfo" Type="Self.tb_UserInfo" Multiplicity="1" />
+    <End Role="tb_Favorite" Type="Self.tb_Favorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_UserInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Favorite">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Group">
+    <End Role="tb_Group" Type="Self.tb_Group" Multiplicity="1" />
+    <End Role="tb_UserGroup" Type="Self.tb_UserGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_UserGroup">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Group_Member">
+    <End Role="tb_UserInfo" Type="Self.tb_UserInfo" Multiplicity="1" />
+    <End Role="tb_UserGroup" Type="Self.tb_UserGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_UserInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_UserGroup">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Group_User">
+    <End Role="tb_UserInfo" Type="Self.tb_UserInfo" Multiplicity="1" />
+    <End Role="tb_Group" Type="Self.tb_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_UserInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Group">
+        <PropertyRef Name="Owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="SocialMediaDBModelStoreContainer">
     <EntitySet Name="tb_Blog" EntityType="Self.tb_Blog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_BlogGroup" EntityType="Self.tb_BlogGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Comment" EntityType="Self.tb_Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Favorite" EntityType="Self.tb_Favorite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Group" EntityType="Self.tb_Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_UserGroup" EntityType="Self.tb_UserGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_UserInfo" EntityType="Self.tb_UserInfo" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="fk_blog_user" Association="Self.fk_blog_user">
       <End Role="tb_UserInfo" EntitySet="tb_UserInfo" />
       <End Role="tb_Blog" EntitySet="tb_Blog" />
+    </AssociationSet>
+    <AssociationSet Name="fk_BlogGroup_BlogId" Association="Self.fk_BlogGroup_BlogId">
+      <End Role="tb_Blog" EntitySet="tb_Blog" />
+      <End Role="tb_BlogGroup" EntitySet="tb_BlogGroup" />
+    </AssociationSet>
+    <AssociationSet Name="fk_BlogGroup_GroupId" Association="Self.fk_BlogGroup_GroupId">
+      <End Role="tb_Group" EntitySet="tb_Group" />
+      <End Role="tb_BlogGroup" EntitySet="tb_BlogGroup" />
+    </AssociationSet>
+    <AssociationSet Name="fk_comment_blog" Association="Self.fk_comment_blog">
+      <End Role="tb_Blog" EntitySet="tb_Blog" />
+      <End Role="tb_Comment" EntitySet="tb_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="fk_comment_user" Association="Self.fk_comment_user">
+      <End Role="tb_UserInfo" EntitySet="tb_UserInfo" />
+      <End Role="tb_Comment" EntitySet="tb_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Favorite_Blog" Association="Self.fk_Favorite_Blog">
+      <End Role="tb_Blog" EntitySet="tb_Blog" />
+      <End Role="tb_Favorite" EntitySet="tb_Favorite" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Favorite_User" Association="Self.fk_Favorite_User">
+      <End Role="tb_UserInfo" EntitySet="tb_UserInfo" />
+      <End Role="tb_Favorite" EntitySet="tb_Favorite" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Group" Association="Self.fk_Group">
+      <End Role="tb_Group" EntitySet="tb_Group" />
+      <End Role="tb_UserGroup" EntitySet="tb_UserGroup" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Group_Member" Association="Self.fk_Group_Member">
+      <End Role="tb_UserInfo" EntitySet="tb_UserInfo" />
+      <End Role="tb_UserGroup" EntitySet="tb_UserGroup" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Group_User" Association="Self.fk_Group_User">
+      <End Role="tb_UserInfo" EntitySet="tb_UserInfo" />
+      <End Role="tb_Group" EntitySet="tb_Group" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

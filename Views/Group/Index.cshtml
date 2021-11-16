@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SocialMedia.tb_Group>
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new SocialMediaDBEntities();
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_UserInfo.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detail", "Detail", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
+
+            @if (ViewData["Joined_GroupId_" + item.Id.ToString()] == null)
+            {
+                @Html.ActionLink("Join Group", "JoinGroup", new { id = item.Id })
+            }
+            else {
+                @Html.ActionLink("Leave Group","DeleteMember", new { id = item.Id, memberId = User.Identity.GetUserId()})
+            }
+        </td>
+    </tr>
+}
+
+</table>
+
+
+<style type="text/css">
+    .group-list {
+        display: none;
+    }
+</style>

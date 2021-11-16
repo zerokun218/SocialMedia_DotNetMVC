@@ -1,0 +1,111 @@
+﻿@model SocialMedia.Models.Blog
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>Blog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+    </dl>
+
+    <p style="text-align: center;">
+        @if (ViewBag.IsLike == null)
+        {
+            @Html.ActionLink("Like", "Like", new { id = Model.Id }, new { @class = "text-success", style ="border: 1px solid; padding: 4px;" })
+        }
+        else
+        {
+            @Html.ActionLink("Unlike", "Unlike", new { id = Model.Id }, new { @class = "text-danger", style = "border: 1px solid; padding: 4px;" })
+        }
+    </p>
+</div>
+
+
+
+<hr/>
+
+<div style="padding: 20px; width: 50%; margin: 0 auto 0;">
+    <h3 >Comments</h3>
+    <div style="border: 1px solid; padding: 20px;">
+        @foreach (var cmt in (List<tb_Comment>)ViewData["Comments"])
+        {
+        <div style="border: 1px solid; padding: 5px; margin: 5px;">
+            <p><b>@cmt.tb_UserInfo.Username:</b></p>
+            <p style="margin-left: 20px">@cmt.Content</p>
+        </div>     
+        }
+    </div>
+
+    <div style="margin: 10px;text-align: center; ">
+        @for (int i = 1; i <= Convert.ToInt32(ViewBag.PageCount); i++)
+        {
+            if (i == Convert.ToInt32(ViewBag.CurrentPage))
+            {
+                @Html.ActionLink(i.ToString(), "Detail", "Blog", new { pageNumber = i }, new { @class = "page-number text-danger" })
+            }
+            else
+            {
+                @Html.ActionLink(i.ToString(), "Detail", "Blog", new { pageNumber = i }, new { @class = "page-number" })
+            }
+
+        }
+
+    </div>
+    
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h4>Add new Comment</h4>
+        <textarea name="comment" placeholder="Comment here" style="min-width: 100%;"></textarea>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Add comment" />
+            </div>
+        </div>
+    }
+
+
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<style type="text/css">
+    a.page-number {
+        border: 1px solid;
+        padding: 2px;
+        margin: 3px;
+    }
+</style>

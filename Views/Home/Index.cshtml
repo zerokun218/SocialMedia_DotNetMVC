@@ -12,19 +12,31 @@
             </p>
             @Html.ActionLink("Login", "Login", "Account")
         }
-        else { 
+        else
+        {
             <p>You logged in now. Your Username: &#64;@User.Identity.Name</p>
-            <p>Show @Html.ActionLink("Detail","Detail","Users")</p>
+            <p>Show @Html.ActionLink("Detail", "Detail", "Users")</p>
         }
-        
+
     </li>
-    <li><h3>Users and Roles</h3>
+    <li>
+        <h3>Users and Roles</h3>
         <p>Show Table of Roles in DB: @Html.ActionLink("Show", "Index", "Role")</p>
-        <p>Show Table of Account and its Role: @Html.ActionLink("Show","Index","Users")</p>
-        <p>Show Table of UserInfo: @Html.ActionLink("Show","Index","UserInfo")</p>
+        <p>Show Table of Account and its Role: @Html.ActionLink("Show", "Index", "Users")</p>
+        <p>Show Table of UserInfo: @Html.ActionLink("Show", "Index", "UserInfo")</p>
     </li>
     <li>
         <h3>Blog</h3>
-        <p>List of Blog: @Html.ActionLink("Show","Index","Blog")</p>
+        <p>List of Blog: @Html.ActionLink("Show", "Index", "Blog")</p>
+    </li>
+    <li>
+        <h3>Group</h3>
+        <p>List of Group (Member in a Group; join/leave group; Create new blog in Group): @Html.ActionLink("Show", "Index", "Group")</p>
     </li>
 </ul>
+
+<style type="text/css">
+    .group-list {
+        display: block;
+    }
+</style>

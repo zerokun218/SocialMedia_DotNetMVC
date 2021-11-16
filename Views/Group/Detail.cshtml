@@ -1,0 +1,113 @@
+﻿@model SocialMedia.tb_Group
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>tb_Group</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_UserInfo.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("UserId")
+        </th>
+        <th>
+            @Html.DisplayName("Username")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in (List<tb_UserGroup>)ViewData["Members"])
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tb_UserInfo.Username)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteMember", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<hr />
+
+<h4>@Html.ActionLink("Create new Blog", "CreateBlog", new { id = Model.Id, returnUrl = HttpContext.Current.Request.Url.AbsolutePath })</h4>
+@if (ViewBag.IsUserIn == null)
+{
+<p class="text-danger">You're not a member in this Group, please join to create Blog in the Group</p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Blog's Title")
+        </th>
+        <th>
+            @Html.DisplayName("Owner")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in (List<tb_BlogGroup>)ViewData["BlogList"])
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tb_Blog.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tb_Blog.tb_UserInfo.Username)
+            </td>
+            <td>
+                @if (User.Identity.GetUserId() == item.tb_Blog.tb_UserInfo.UserId)
+                {
+                    @Html.ActionLink("Delete |", "Delete","Blog", new { id = item.BlogId, returnUrl = Request.Url.AbsolutePath }, null)
+
+                }
+                @Html.ActionLink("Detail", "Detail", "Blog", new { id = item.BlogId }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<style type="text/css">
+    .group-list {
+        display: none;
+    }
+</style>

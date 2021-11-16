@@ -1,4 +1,5 @@
 ﻿@model SocialMedia.Models.ApplicationUser
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Detail";
@@ -113,7 +114,7 @@
             @Html.DisplayFor(model => role)
         </dd>
 
-        @if (ViewBag.AllowChangePassword != null)
+        @if (ViewBag.isOwner != null)
         {
             <dt>
                 Change Password
@@ -133,6 +134,53 @@
         }
     </dl>
 </div>
+
+<hr/>
+<div>
+    <h4>Blog Favorite:</h4>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th></th>
+        </tr>
+        @foreach (var item in (List<tb_Favorite>)ViewData["Favorite"])
+        {
+    <tr>
+        <td>@item.tb_Blog.Title</td>
+        @if (ViewBag.isOwner != null)
+        {
+            <td>@Html.ActionLink("Unlike", "UnLike", "Blog", new { id = item.BlogId, returnUrl = Request.Url.AbsolutePath }, null)</td>
+
+        }
+    </tr>
+        }
+    </table>
+
+    
+</div>
+
+<hr/>
+<div>
+    <h4>Blog Favorite:</h4>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th></th>
+        </tr>
+        @foreach (var item in (List<tb_UserGroup>)ViewData["Groups"])
+        {
+            <tr>
+                <td>@item.tb_Group.Title</td>
+                <td>@Html.ActionLink("Leave Group", "DeleteMember","Group", new { id = item.GroupId, memberId = User.Identity.GetUserId(), returnUrl = Request.Url.AbsolutePath }, null)</td>
+
+            </tr>
+        }
+    </table>
+
+
+</div>
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

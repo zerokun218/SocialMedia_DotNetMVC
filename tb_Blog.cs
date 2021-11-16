@@ -14,11 +14,26 @@ namespace SocialMedia
     
     public partial class tb_Blog
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_Blog()
+        {
+            this.tb_BlogGroup = new HashSet<tb_BlogGroup>();
+            this.tb_Comment = new HashSet<tb_Comment>();
+            this.tb_Favorite = new HashSet<tb_Favorite>();
+        }
+    
         public int Id { get; set; }
         public int Author { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        public string ImageUrl { get; set; }
     
         public virtual tb_UserInfo tb_UserInfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_BlogGroup> tb_BlogGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Comment> tb_Comment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Favorite> tb_Favorite { get; set; }
     }
 }

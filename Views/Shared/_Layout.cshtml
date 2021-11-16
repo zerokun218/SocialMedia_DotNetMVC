@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,7 +29,22 @@
             </div>
         </div>
     </div>
+
     <div class="container body-content">
+        <div class="group-list" style="margin: 20px;">
+            @foreach (var item in (new SocialMediaDBEntities()).tb_Group.ToList())
+            {
+                <span class="btn btn-default">
+                    @Html.ActionLink(item.Title, "Detail", "Group", new { id = item.Id }, null)
+                </span>
+            }
+        </div>
+        <style type="text/css">
+            .group-list {
+                display: none;
+            }
+        </style>
+
         @RenderBody()
         <hr />
         <footer>
@@ -42,3 +57,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+

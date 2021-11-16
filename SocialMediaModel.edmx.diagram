@@ -4,10 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ad9fef1a595b47a18bc6e1e48fe97cb7" Name="Diagram1">
-        <EntityTypeShape EntityType="SocialMediaDBModel.tb_Blog" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SocialMediaDBModel.tb_UserInfo" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+      <Diagram DiagramId="1b13e6916caf4cc798390ed0dbee3ee5" Name="Diagram1">
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_Blog" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_BlogGroup" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_Comment" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_Favorite" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_Group" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_UserGroup" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMediaDBModel.tb_UserInfo" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <AssociationConnector Association="SocialMediaDBModel.fk_blog_user" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_BlogGroup_BlogId" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_comment_blog" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_Favorite_Blog" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_BlogGroup_GroupId" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_comment_user" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_Favorite_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_Group_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMediaDBModel.fk_Group_Member" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

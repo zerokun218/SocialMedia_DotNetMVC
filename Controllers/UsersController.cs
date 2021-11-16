@@ -12,6 +12,7 @@ namespace SocialMedia.Controllers
     //[Authorize]
     public class UsersController : Controller
     {
+        public SocialMediaDBEntities db = new SocialMediaDBEntities();
         public ApplicationDbContext context = new ApplicationDbContext();
         public Boolean isAdminUser()
         {
@@ -61,9 +62,19 @@ namespace SocialMedia.Controllers
         public ActionResult Detail(string Id) {
             if (String.IsNullOrEmpty(Id)) {
                 Id = User.Identity.GetUserId();
-                ViewBag.AllowChangePassword = "true";
+                ViewBag.isOwner = "true";
+            }
+            if (User.Identity.GetUserId() == Id) {
+                ViewBag.isOwner = "true";
             }
             var user = (context).Users.Where(u => u.Id == Id).FirstOrDefault();
+            var userInfo = DAL.DBContext.GetUserInfo(Id);
+            var lstFavor = db.tb_Favorite.Where(f => f.UserId == userInfo.Id).ToList();
+            var lstGroup = db.tb_UserGroup.Where(g => g.MemberId == userInfo.Id).ToList();
+
+            ViewData["Groups"] = lstGroup;
+
+            ViewData["Favorite"] = lstFavor;
             return View(user);
         }
 

@@ -26,6 +26,11 @@ namespace SocialMedia
         }
     
         public virtual DbSet<tb_Blog> tb_Blog { get; set; }
+        public virtual DbSet<tb_BlogGroup> tb_BlogGroup { get; set; }
+        public virtual DbSet<tb_Comment> tb_Comment { get; set; }
+        public virtual DbSet<tb_Favorite> tb_Favorite { get; set; }
+        public virtual DbSet<tb_Group> tb_Group { get; set; }
+        public virtual DbSet<tb_UserGroup> tb_UserGroup { get; set; }
         public virtual DbSet<tb_UserInfo> tb_UserInfo { get; set; }
     }
 }

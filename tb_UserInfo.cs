@@ -18,6 +18,10 @@ namespace SocialMedia
         public tb_UserInfo()
         {
             this.tb_Blog = new HashSet<tb_Blog>();
+            this.tb_Comment = new HashSet<tb_Comment>();
+            this.tb_Favorite = new HashSet<tb_Favorite>();
+            this.tb_Group = new HashSet<tb_Group>();
+            this.tb_UserGroup = new HashSet<tb_UserGroup>();
         }
     
         public int Id { get; set; }
@@ -25,8 +29,17 @@ namespace SocialMedia
         public string Username { get; set; }
         public Nullable<int> Age { get; set; }
         public string Role { get; set; }
+        public string ImageUrl { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Blog> tb_Blog { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Comment> tb_Comment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Favorite> tb_Favorite { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Group> tb_Group { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_UserGroup> tb_UserGroup { get; set; }
     }
 }
